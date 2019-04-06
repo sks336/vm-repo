@@ -1,3 +1,22 @@
+if [ -f /etc/bashrc ]; then
+        . /etc/bashrc
+fi
+
+alias ll='ls -asl'
+alias c='clear'
+alias mcp='mvn clean package'
+alias mci='mvn clean install'
+alias dps='docker ps'
+alias dpsa='docker ps -a'
+
+export PS1="\u@\h\[\033[32m\]\w\[\033[33m\]\[\033[00m\] $ "
+export JAVA_HOME=/opt/java
+export PATH=$PATH:${JAVA_HOME}/bin
+export MAVEN_HOME=/home/sachin/softwares/maven
+export M2_HOME=/home/sachin/softwares/maven
+export PATH=${PATH}:${MAVEN_HOME}/bin:/home/sachin/softwares/bins
+
+
 alias ssh_image_base='ssh sachin@192.168.101.100'
 alias ssh_image_docker='ssh sachin@192.168.102.100'
 alias ssh_image_spark='ssh sachin@192.168.103.100'
