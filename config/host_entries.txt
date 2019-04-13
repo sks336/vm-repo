@@ -1,19 +1,20 @@
 127.0.0.1   vm-sachin
-192.168.101.101	vm-kafka
+192.168.10.11    vm-node1
+192.168.10.12    vm-node2
+192.168.10.13    vm-node3
+192.168.10.14    vm-node4
+192.168.10.15    vm-node5
+192.168.10.16    vm-node6
+
+192.168.10.10   vm-workspace
+192.168.101.11	vm-kafka
+192.168.103.11 vm-spark-master
+192.168.103.12 vm-spark-slave-1
+192.168.103.13 vm-spark-slave-2
+192.168.105.11	vm-nginx
 192.168.106.11	vm-kafka-zk-1
 192.168.106.12	vm-kafka-zk-2
 192.168.106.13	vm-kafka-zk-3
-192.168.1.100 vm-work
-192.168.103.101 vm-spark-master
-192.168.103.102 vm-spark-slave-1
-192.168.103.103 vm-spark-slave-2
-192.168.1.11    vm-node1
-192.168.1.12    vm-node2
-192.168.1.13    vm-node3
-192.168.1.14    vm-node4
-192.168.1.15    vm-node5
-192.168.1.16    vm-node6
-192.168.105.11	vm-nginx
-192.168.10.11   vm-workspace
+
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
