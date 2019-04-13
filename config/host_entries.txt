@@ -6,7 +6,7 @@
 192.168.10.15    vm-node5
 192.168.10.16    vm-node6
 
-192.168.10.10   vm-workspace
+192.168.10.11   vm-workspace
 192.168.101.11	vm-kafka
 192.168.103.11 vm-spark-master
 192.168.103.12 vm-spark-slave-1
