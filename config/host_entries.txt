@@ -16,5 +16,7 @@
 192.168.106.12	vm-kafka-zk-2
 192.168.106.13	vm-kafka-zk-3
 
+192.168.20.11   vm-docker-session
+
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
