@@ -39,3 +39,5 @@ alias ssh_node4='ssh sachin@vm-node4'
 alias ssh_node5='ssh sachin@vm-node5'
 alias ssh_node6='ssh sachin@vm-node6'
 alias ssh_nginx='ssh sachin@vm-nginx'
+
+alias ssh_docker_session='ssh sachin@vm-docker-session'
