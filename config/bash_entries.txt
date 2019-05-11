@@ -1,3 +1,5 @@
+export ORIG_PATH=${PATH}
+
 if [ -f /etc/bashrc ]; then
         . /etc/bashrc
 fi
