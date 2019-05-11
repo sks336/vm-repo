@@ -21,6 +21,12 @@
 192.168.103.12 vm-spark-slave-1
 192.168.103.13 vm-spark-slave-2
 
+192.168.20.11    vm-workspace-1
+192.168.20.12    vm-workspace-2
+192.168.20.13    vm-workspace-3
+
+
+
 #####
 
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
