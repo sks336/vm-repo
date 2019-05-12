@@ -37,21 +37,21 @@ alias ssh_kafka_zk_3='ssh sachin@vm-kafka-zk-3'
 
 alias ssh_nginx='ssh sachin@vm-nginx'
 
-alias ssh_node1='ssh sachin@vm-node1'
-alias ssh_node2='ssh sachin@vm-node2'
-alias ssh_node3='ssh sachin@vm-node3'
-alias ssh_node4='ssh sachin@vm-node4'
-alias ssh_node5='ssh sachin@vm-node5'
-alias ssh_node6='ssh sachin@vm-node6'
+alias ssh_node_1='ssh sachin@vm-node-1'
+alias ssh_node_2='ssh sachin@vm-node-2'
+alias ssh_node_3='ssh sachin@vm-node-3'
+alias ssh_node_4='ssh sachin@vm-node-4'
+alias ssh_node_5='ssh sachin@vm-node-5'
+alias ssh_node_6='ssh sachin@vm-node-6'
 
-alias ssh_postgres='ssh sachin@vm-postgres-1'
+alias ssh_postgres_1='ssh sachin@vm-postgres-1'
 
 alias ssh_spark_master='ssh sachin@vm-spark-master'
 alias ssh_spark_slave_1='ssh sachin@vm-spark-slave-1'
 alias ssh_spark_slave_2='ssh sachin@vm-spark-slave_2'
 
-alias ssh_workspace1='ssh sachin@vm-workspace-1'
-alias ssh_workspace2='ssh sachin@vm-workspace-2'
-alias ssh_workspace3='ssh sachin@vm-workspace-3'
+alias ssh_workspace_1='ssh sachin@vm-workspace-1'
+alias ssh_workspace_2='ssh sachin@vm-workspace-2'
+alias ssh_workspace_3='ssh sachin@vm-workspace-3'
 
-alias ssh_vm0='ssh sachin@vm-0'
+alias ssh_vm_0='ssh sachin@vm-0'
