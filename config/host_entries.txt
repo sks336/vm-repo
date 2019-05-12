@@ -17,6 +17,8 @@
 192.168.10.15    vm-node5
 192.168.10.16    vm-node6
 
+192.168.107.11    vm-postgres
+
 192.168.103.11 vm-spark-master
 192.168.103.12 vm-spark-slave-1
 192.168.103.13 vm-spark-slave-2
