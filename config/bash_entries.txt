@@ -44,7 +44,7 @@ alias ssh_node4='ssh sachin@vm-node4'
 alias ssh_node5='ssh sachin@vm-node5'
 alias ssh_node6='ssh sachin@vm-node6'
 
-alias ssh_postgres='ssh sachin@vm-postgres'
+alias ssh_postgres='ssh sachin@vm-postgres-1'
 
 alias ssh_spark_master='ssh sachin@vm-spark-master'
 alias ssh_spark_slave_1='ssh sachin@vm-spark-slave-1'
