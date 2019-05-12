@@ -27,6 +27,7 @@ alias ssh_elasticsearch_1='ssh sachin@vm-elasticsearch-1'
 
 alias ssh_image_base='ssh sachin@192.168.100.10'
 alias ssh_image_docker='ssh sachin@192.168.100.20'
+alias ssh_image_kubernetes='ssh sachin@192.168.100.25'
 alias ssh_image_spark='ssh sachin@192.168.100.30'
 
 alias ssh_kafka='ssh sachin@vm-kafka'
