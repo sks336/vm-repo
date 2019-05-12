@@ -21,14 +21,14 @@ export PATH=${PATH}:${JAVA_HOME}/bin:${MAVEN_HOME}/bin:${ZK_HOME}/bin:${KAFKA_HO
 
 ################
 
-alias ssh_docker_session='ssh sachin@vm-docker-session'
-
-alias ssh_elasticsearch_1='ssh sachin@vm-elasticsearch-1'
-
+# Define Image ssh aliases.
 alias ssh_image_base='ssh sachin@192.168.100.10'
 alias ssh_image_docker='ssh sachin@192.168.100.20'
 alias ssh_image_kubernetes='ssh sachin@192.168.100.25'
 alias ssh_image_spark='ssh sachin@192.168.100.30'
+
+# Define VMs aliases.
+alias ssh_elasticsearch_1='ssh sachin@vm-elasticsearch-1'
 
 alias ssh_kafka='ssh sachin@vm-kafka'
 
