@@ -51,6 +51,8 @@ alias ssh_spark_master='ssh sachin@vm-spark-master'
 alias ssh_spark_slave_1='ssh sachin@vm-spark-slave-1'
 alias ssh_spark_slave_2='ssh sachin@vm-spark-slave_2'
 
+alias ssh_spring_basic_1='ssh sachin@vm-spring-basic-1'
+
 alias ssh_workspace_1='ssh sachin@vm-workspace-1'
 alias ssh_workspace_2='ssh sachin@vm-workspace-2'
 alias ssh_workspace_3='ssh sachin@vm-workspace-3'
