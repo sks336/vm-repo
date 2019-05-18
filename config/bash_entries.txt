@@ -38,7 +38,7 @@ alias ssh_kafka_zk_1='ssh sachin@vm-kafka-zk-1'
 alias ssh_kafka_zk_2='ssh sachin@vm-kafka-zk-2'
 alias ssh_kafka_zk_3='ssh sachin@vm-kafka-zk-3'
 
-alias ssh_nginx='ssh sachin@vm-nginx'
+alias ssh_nginx='ssh sachin@vm-nginx-1'
 
 alias ssh_node_1='ssh sachin@vm-node-1'
 alias ssh_node_2='ssh sachin@vm-node-2'
