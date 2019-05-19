@@ -15,6 +15,7 @@ function pushIPInfoToConsul() {
     NODE_ID=$2
     CONSUL_IP=192.168.109.11
     #IP_ADDR=$(ifconfig | grep -A 1 'eth1' | tail -1 | awk '{print $2}')
+    ifconfig
     IP_ADDR=$(ifconfig | grep -A 3 'eth1' | grep inet | grep netmask | awk '{print $2}') 
     DATA_TO_PUSH={\"hostname\":\""${VM_PREFIX}-${NODE_ID}"\",\""ipaddress"\":\""${IP_ADDR}"\"}
     echo 'Going to push the data to Consul'
