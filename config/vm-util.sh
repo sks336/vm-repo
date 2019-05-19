@@ -1,6 +1,3 @@
-#!/usr/bin/env bash
-
-
 function makeHostAndBashEntries() {
     IFS=
     host_entries=$(curl -sS https://raw.githubusercontent.com/sks336/vm-repo/master/config/host_entries.txt)
