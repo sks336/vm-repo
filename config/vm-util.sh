@@ -54,7 +54,7 @@ if [ "$UPDATE_FROM_CONSUL" == "true" ]; then
                 json=$(curl -sS http://${CONSUL_IP}:8500/v1/kv/$key | jq -r .[0].Value | base64 --decode)
                 host=$(echo $json | jq -r .hostname)
                 ip=$(echo $json | jq -r .ipaddress)
-                echo -e "$ip   $host" >> /private/etc/hosts
+                echo -e "$ip   $host" >> /etc/hosts
         done
 
 fi
