@@ -45,12 +45,12 @@ alias ssh_kafka_zk_3='ssh sachin@vm-kafka-zk-3'
 
 alias ssh_nginx_1='ssh sachin@vm-nginx-1'
 
-alias ssh_node_1='ssh sachin@vm-node-1'
-alias ssh_node_2='ssh sachin@vm-node-2'
-alias ssh_node_3='ssh sachin@vm-node-3'
-alias ssh_node_4='ssh sachin@vm-node-4'
-alias ssh_node_5='ssh sachin@vm-node-5'
-alias ssh_node_6='ssh sachin@vm-node-6'
+alias ssh_kube_1='ssh sachin@vm-kube-1'
+alias ssh_kube_2='ssh sachin@vm-kube-2'
+alias ssh_kube_3='ssh sachin@vm-kube-3'
+alias ssh_kube_4='ssh sachin@vm-kube-4'
+alias ssh_kube_5='ssh sachin@vm-kube-5'
+alias ssh_kube_6='ssh sachin@vm-kube-6'
 
 alias ssh_postgres_1='ssh sachin@vm-postgres-1'
 
