@@ -30,6 +30,11 @@ alias ssh_image_kubernetes='ssh sachin@192.168.100.25'
 alias ssh_image_spark='ssh sachin@192.168.100.30'
 
 # Define VMs aliases.
+
+alias ssh_consul_vault_1='ssh sachin@vm-consul-vault-1'
+alias ssh_consul_vault_2='ssh sachin@vm-consul-vault-2'
+alias ssh_consul_vault_3='ssh sachin@vm-consul-vault-3'
+
 alias ssh_elasticsearch_1='ssh sachin@vm-elasticsearch-1'
 
 alias ssh_kafka='ssh sachin@vm-kafka'
