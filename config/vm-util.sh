@@ -36,13 +36,13 @@ echo '127.0.0.1 localhost
 
 '>/etc/hosts
 
-UPDATE_FROM_CONSUL="false"
+UPDATE_FROM_CONSUL="true"
 
 while getopts c opts
 do
     case "${opts}" in
-        c) echo 'Option "-c" is chosen, Going to update from Consul.....'
-            UPDATE_FROM_CONSUL="true";;
+        o) echo 'Option "-o" is chosen, NOT Going to update from Consul.....'
+            UPDATE_FROM_CONSUL="false";;
     esac
 done
 
