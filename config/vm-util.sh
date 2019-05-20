@@ -62,3 +62,26 @@ echo 'Host Entry cleaned....'
 cat /etc/hosts
 
 }
+
+function waitForIPAddressPopulation() {
+    TIMEOUT=$1
+    INTERVAL=$2
+    ATTEMPT_COUNT=$(($TIMEOUT/$INTERVAL))
+    echo "TIMEOUT=$TIMEOUT, INTERVAL=$INTERVAL, ATTEMPT_COUNT=$ATTEMPT_COUNT"
+    i=1
+        while [ "$i" -le "$ATTEMPT_COUNT" ]; do
+            if [ "$ATTEMPT_COUNT" = "$i" ]; then
+                echo 'Reached Time Out!!!!'
+                ifconfig | grep -A 5 'eth1'
+                return 1;
+            fi
+            IP_ADDR=$(ifconfig | grep -A 3 'eth1' | grep inet | grep netmask | awk '{print $2}')
+            if [ ! -z $IP_ADDR ]; then
+                echo 'IP Address is available and having value as ['${IP_ADDR}']'
+                return 0;
+            fi
+            echo '['$i'] - IP not available yet, would be attempted again in '$INTERVAL' seconds'
+            sleep $INTERVAL
+            i=$(($i + 1))
+        done
+}
