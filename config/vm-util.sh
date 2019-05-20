@@ -19,10 +19,9 @@ function pushIPInfoToConsul() {
 }
 
 function refreshIPsFromConsul() {
-echo '127.0.0.1 localhost
-127.0.0.1   vm-sachin
+echo '127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
 255.255.255.255 broadcasthost
-::1             localhost
 
 192.168.0.120   vm-0
 192.168.109.11  vm-consul-vault-1
