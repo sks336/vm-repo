@@ -4,6 +4,10 @@ function makeHostAndBashEntries() {
     echo ${bash_entries} > /home/sachin/.bashrc
 }
 
+function makeBashEntries() {
+    makeHostAndBashEntries
+}
+
 function pushIPInfoToConsul() {
     VM_PREFIX=$1
     NODE_ID=$2
