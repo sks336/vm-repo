@@ -34,7 +34,7 @@ echo '127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdom
 
 UPDATE_FROM_CONSUL="true"
 
-while getopts c opts
+while getopts o opts
 do
     case "${opts}" in
         o) echo 'Option "-o" is chosen, NOT Going to update from Consul.....'
