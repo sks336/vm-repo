@@ -1,8 +1,5 @@
 function makeHostAndBashEntries() {
     IFS=
-    host_entries=$(curl -sS https://raw.githubusercontent.com/sks336/vm-repo/master/config/host_entries.txt)
-    echo ${host_entries} > /etc/hosts
-
     bash_entries=$(curl -sS https://raw.githubusercontent.com/sks336/vm-repo/master/config/bash_entries.txt)
     echo ${bash_entries} > /home/sachin/.bashrc
 }
