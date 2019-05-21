@@ -5,7 +5,9 @@ function makeHostAndBashEntries() {
 }
 
 function makeBashEntries() {
-    makeHostAndBashEntries
+    IFS=
+    bash_entries=$(curl -sS https://raw.githubusercontent.com/sks336/vm-repo/master/config/bash_entries.txt)
+    echo ${bash_entries} > /home/sachin/.bashrc
 }
 
 function pushIPInfoToConsul() {
