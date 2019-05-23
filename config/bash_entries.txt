@@ -37,13 +37,15 @@ alias ssh_consul_vault_3='ssh sachin@vm-consul-vault-3'
 
 alias ssh_elasticsearch_1='ssh sachin@vm-elasticsearch-1'
 
+alias ssh_hadoop_spark_master='ssh sachin@vm-hadoop-spark-master-1'
+alias ssh_hadoop_spark_slave_1='ssh sachin@vm-hadoop-spark-slave-1'
+alias ssh_hadoop_spark_slave_2='ssh sachin@vm-hadoop-spark-slave-2'
+
 alias ssh_kafka='ssh sachin@vm-kafka'
 
 alias ssh_kafka_zk_1='ssh sachin@vm-kafka-zk-1'
 alias ssh_kafka_zk_2='ssh sachin@vm-kafka-zk-2'
 alias ssh_kafka_zk_3='ssh sachin@vm-kafka-zk-3'
-
-alias ssh_nginx_1='ssh sachin@vm-nginx-1'
 
 alias ssh_kube_1='ssh sachin@vm-kube-1'
 alias ssh_kube_2='ssh sachin@vm-kube-2'
@@ -52,11 +54,11 @@ alias ssh_kube_4='ssh sachin@vm-kube-4'
 alias ssh_kube_5='ssh sachin@vm-kube-5'
 alias ssh_kube_6='ssh sachin@vm-kube-6'
 
+alias ssh_nginx_1='ssh sachin@vm-nginx-1'
+
 alias ssh_postgres_1='ssh sachin@vm-postgres-1'
 
-alias ssh_spark_master='ssh sachin@vm-spark-master'
-alias ssh_spark_slave_1='ssh sachin@vm-spark-slave-1'
-alias ssh_spark_slave_2='ssh sachin@vm-spark-slave_2'
+
 
 alias ssh_spring_basic_1='ssh sachin@vm-spring-basic-1'
 
