@@ -11,17 +11,17 @@ function makeBashEntries() {
 }
 
 function registerToConsul() {
-SERVICE_NAME=$1
-NODE_ID=$2
-rm -rf ${HOME_DIR}/consul/service
-mkdir -p ${HOME_DIR}/consul/service
-cp ${RESOURCES_DIR}/consul/service/${SERVICE_NAME}.json ${HOME_DIR}/consul/service
-IP_ADDR=$(ifconfig | grep -A 3 'eth1' | grep inet | grep netmask | awk '{print $2}')
-sed -i "s/<ID>/${NODE_ID}/g" ${HOME_DIR}/consul/service/${SERVICE_NAME}.json
-sed -i "s/<NODE_IP>/${IP_ADDR}/g" ${HOME_DIR}/consul/service/${SERVICE_NAME}.json
-curl -sS --request PUT https://vm-consul-vault-1:8500/v1/agent/service/deregister/${SERVICE_NAME}-${NODE_ID}
-curl -sS --request PUT --data @${HOME}/consul/service/${SERVICE_NAME}.json http://vm-consul-vault-1:8500/v1/agent/service/register
-echo 'Service registered to consul..'
+    SERVICE_NAME=$1
+    NODE_ID=$2
+    rm -rf ${HOME_DIR}/consul/service
+    mkdir -p ${HOME_DIR}/consul/service
+    cp ${RESOURCES_DIR}/consul/service/${SERVICE_NAME}.json ${HOME_DIR}/consul/service
+    IP_ADDR=$(ifconfig | grep -A 3 'eth1' | grep inet | grep netmask | awk '{print $2}')
+    sed -i "s/<ID>/${NODE_ID}/g" ${HOME_DIR}/consul/service/${SERVICE_NAME}.json
+    sed -i "s/<NODE_IP>/${IP_ADDR}/g" ${HOME_DIR}/consul/service/${SERVICE_NAME}.json
+    curl -sS --request PUT https://vm-consul-vault-1:8500/v1/agent/service/deregister/${SERVICE_NAME}-${NODE_ID}
+    curl -sS --request PUT --data @${HOME}/consul/service/${SERVICE_NAME}.json http://vm-consul-vault-1:8500/v1/agent/service/register
+    echo 'Service registered to consul..'
 }
 
 function pushIPInfoToConsul() {
