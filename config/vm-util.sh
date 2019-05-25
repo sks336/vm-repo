@@ -10,26 +10,12 @@ function makeBashEntries() {
     echo ${bash_entries} > /home/sachin/.bashrc
 }
 
-function pushIPInfoToConsul() {
-    VM_PREFIX=$1
-    NODE_ID=$2
-    CONSUL_IP=192.168.109.11
-    IP_ADDR=$(ifconfig | grep -A 3 'eth1' | grep inet | grep netmask | awk '{print $2}') 
-    DATA_TO_PUSH={\"hostname\":\""${VM_PREFIX}-${NODE_ID}"\",\""ipaddress"\":\""${IP_ADDR}"\"}
-    echo 'Going to push the data to Consul'
-    echo $DATA_TO_PUSH
-    curl -sS --request PUT --data $DATA_TO_PUSH http://${CONSUL_IP}:8500/v1/kv/ipaddress/${VM_PREFIX}/${NODE_ID}
-}
-
 function refreshIPsFromConsul() {
 echo '127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
 255.255.255.255 broadcasthost
 
 192.168.0.120   vm-0
-192.168.109.11  vm-consul-vault-1
-192.168.109.12  vm-consul-vault-2
-192.168.109.13  vm-consul-vault-3
 
 ########################################
 
@@ -47,12 +33,11 @@ done
 
 if [ "$UPDATE_FROM_CONSUL" == "true" ]; then
         CONSUL_IP=192.168.109.11
-        nKeys=$(curl -sS http://${CONSUL_IP}:8500/v1/kv/?keys | jq length)
+        nodeJSON=$(curl -sS http://${CONSUL_IP}:8500/v1/catalog/nodes)
+        nKeys=$(echo ${nodeJSON} | jq length)
         for ((i=0;i<nKeys;i++)); do
-                key=$(curl -sS http://${CONSUL_IP}:8500/v1/kv/?keys | jq -r .[$i])
-                json=$(curl -sS http://${CONSUL_IP}:8500/v1/kv/$key | jq -r .[0].Value | base64 --decode)
-                host=$(echo $json | jq -r .hostname)
-                ip=$(echo $json | jq -r .ipaddress)
+                host=$(echo ${nodeJSON} | jq -r .[$i].Node)
+                ip=$(echo ${nodeJSON} | jq -r .[$i].Address)
                 echo -e "$ip   $host" >> /etc/hosts
         done
 
@@ -60,7 +45,6 @@ fi
 
 echo 'Host Entry cleaned....'
 cat /etc/hosts
-
 }
 
 function waitForIPAddressPopulation() {
