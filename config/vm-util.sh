@@ -40,7 +40,12 @@ if [ "$UPDATE_FROM_CONSUL" == "true" ]; then
         for ((i=0;i<nKeys;i++)); do
                 host=$(echo ${nodeJSON} | jq -r .[$i].Node)
                 ip=$(echo ${nodeJSON} | jq -r .[$i].Address)
-                echo -e "$ip   $host" >> /etc/hosts
+                if [ "${ip}" == vm-consul-vault* ]; then
+                    echo 'not making this entry...'${ip}
+                else
+                    echo -e "$ip   $host" >> /etc/hosts                
+                fi
+
         done
 
 fi
