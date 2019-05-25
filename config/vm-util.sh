@@ -78,9 +78,6 @@ function registerToConsul() {
     NODE_ID=$1
     NODE_TYPE=$2
     CONSUL_IP=192.168.109.11
-    rm -rf ${HOME}/consul
-    mkdir -p ${HOME}/consul
-    cp -rf /vagrant/resources/config/consul/* ${HOME}/consul
     IP_ADDR=$(ifconfig | grep -A 3 'eth1' | grep inet | grep netmask | awk '{print $2}')
     find ${HOME}/consul/service -type f | xargs sed -i  "s/<ID>/${NODE_ID}/g"
     find ${HOME}/consul/service -type f | xargs sed -i  "s/<NODE_ID>/${IP_ADDR}/g"
