@@ -80,7 +80,7 @@ function waitForIPAddressPopulation() {
 
 function registerToConsul() {
     NODE_ID=$1
-    NODE_TYPE=$2 # master/slave
+    NODE_TYPE=$2
     rm -rf ${HOME_DIR}/consul
     mkdir -p ${HOME_DIR}/consul
     cp -rf ${RESOURCES_DIR}/consul/* ${HOME_DIR}/consul
