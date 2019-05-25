@@ -89,5 +89,5 @@ function registerToConsul() {
     find ${HOME}/consul/service -type f | xargs sed -i  "s/<NODE_ID>/${IP_ADDR}/g"
     find ${HOME}/consul/service -type f | xargs sed -i  "s/<NODE_TYPE>/${NODE_TYPE}/g"
     nohup consul agent -bind '{{ GetInterfaceIP "eth1" }}' -retry-join "vm-consul-vault-1" -config-dir ${HOME}/consul/service -data-dir /tmp/consul > ${HOME}/consul/consul.out &
-    echo 'Service(s) registered to Consul..'
+    echo 'Services registered to Consul..'
 }
