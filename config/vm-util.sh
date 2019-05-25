@@ -16,7 +16,9 @@ echo '127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdom
 255.255.255.255 broadcasthost
 
 192.168.0.120   vm-0
-
+192.168.109.11  vm-consul-vault-1
+192.168.109.12  vm-consul-vault-2
+192.168.109.13  vm-consul-vault-3
 ########################################
 
 '>/etc/hosts
