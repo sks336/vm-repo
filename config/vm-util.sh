@@ -60,7 +60,6 @@ function waitForIPAddressPopulation() {
             if [ "$ATTEMPT_COUNT" = "$i" ]; then
                 echo 'Reached Time Out!!!!'
                 ifconfig | grep -A 5 'eth1'
-                echo 'Exiting because IP address couldn't be acquired.....'
                 return 1;
             fi
             IP_ADDR=$(ifconfig | grep -A 3 'eth1' | grep inet | grep netmask | awk '{print $2}')
@@ -72,6 +71,7 @@ function waitForIPAddressPopulation() {
             sleep $INTERVAL
             i=$(($i + 1))
         done
+        
 }
 
 function registerToConsul() {  
