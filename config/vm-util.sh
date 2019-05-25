@@ -79,9 +79,9 @@ function registerToConsul() {
     NODE_TYPE=$2
     CONSUL_IP=192.168.109.11
     IP_ADDR=$(ifconfig | grep -A 3 'eth1' | grep inet | grep netmask | awk '{print $2}')
-    find ${HOME}/consul/service -type f | xargs sed -i  "s/<ID>/${NODE_ID}/g"
-    find ${HOME}/consul/service -type f | xargs sed -i  "s/<NODE_ID>/${IP_ADDR}/g"
-    find ${HOME}/consul/service -type f | xargs sed -i  "s/<NODE_TYPE>/${NODE_TYPE}/g"
+    find ${HOME}/resources/config/consul/service -type f | xargs sed -i  "s/<ID>/${NODE_ID}/g"
+    find ${HOME}/resources/config/consul/service -type f | xargs sed -i  "s/<NODE_ID>/${IP_ADDR}/g"
+    find ${HOME}/resources/config/consul/service -type f | xargs sed -i  "s/<NODE_TYPE>/${NODE_TYPE}/g"
     nohup consul agent -node ${IP_ADDR} -bind '{{ GetInterfaceIP "eth1" }}' -retry-join "${CONSUL_IP}" -config-dir ${HOME}/resources/config/consul/service -data-dir /tmp/consul > ${HOME}/consul.out &
     echo 'Services registered to Consul..'
 }
