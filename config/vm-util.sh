@@ -101,16 +101,16 @@ function waitForIPAddressPopulation() {
 }
 
 function registerToConsul() {
-    SERVICE_NAME=$1
-    NODE_ID=$2
-    NODE_TYPE=$3
+    NODE_ID=$1
+    NODE_TYPE=$2 # master/slave
     rm -rf ${HOME_DIR}/consul
     mkdir -p ${HOME_DIR}/consul
     cp -rf ${RESOURCES_DIR}/consul/* ${HOME_DIR}/consul
     IP_ADDR=$(ifconfig | grep -A 3 'eth1' | grep inet | grep netmask | awk '{print $2}')
-    sed -i "s/<ID>/${NODE_ID}/g" ${HOME_DIR}/consul/service/${SERVICE_NAME}.json
-    sed -i "s/<NODE_ID>/${IP_ADDR}/g" ${HOME_DIR}/consul/service/${SERVICE_NAME}.json
-    sed -i "s/<NODE_TYPE>/${NODE_TYPE}/g" ${HOME_DIR}/consul/service/${SERVICE_NAME}.json
-    nohup consul agent -bind '{{ GetInterfaceIP "eth1" }}' -retry-join "vm-consul-vault-1" -config-dir /home/sachin/consul/service -data-dir /tmp/consul > ${HOME}/consul/${VM_PREFIX}-${NODE_ID}.log &
-    echo 'Service registered to consul..'
+    find ${HOME}/consul/service -type f | xargs sed -i  "s/<ID>/${NODE_ID}/g"
+    find ${HOME}/consul/service -type f | xargs sed -i  "s/<NODE_ID>/${IP_ADDR}/g"
+    find ${HOME}/consul/service -type f | xargs sed -i  "s/<NODE_TYPE>/${NODE_TYPE}/g"
+    nohup consul agent -bind '{{ GetInterfaceIP "eth1" }}' -retry-join "vm-consul-vault-1" \
+        -config-dir /home/sachin/consul/service -data-dir /tmp/consul > ${HOME}/consul/${VM_PREFIX}-${NODE_ID}.log &
+    echo 'Service(s) registered to Consul..'
 }
