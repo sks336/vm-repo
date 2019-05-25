@@ -79,6 +79,7 @@ function waitForIPAddressPopulation() {
 }
 
 function registerToConsul() {
+    echo 'HOME='$HOME
     NODE_ID=$1
     NODE_TYPE=$2
     rm -rf ${HOME_DIR}/consul
@@ -88,6 +89,6 @@ function registerToConsul() {
     find ${HOME}/consul/service -type f | xargs sed -i  "s/<ID>/${NODE_ID}/g"
     find ${HOME}/consul/service -type f | xargs sed -i  "s/<NODE_ID>/${IP_ADDR}/g"
     find ${HOME}/consul/service -type f | xargs sed -i  "s/<NODE_TYPE>/${NODE_TYPE}/g"
-    nohup consul agent -bind '{{ GetInterfaceIP "eth1" }}' -retry-join "vm-consul-vault-1" -config-dir ${HOME}/consul/service -data-dir /tmp/consul > ${HOME}/consul/consul.out &
+    #nohup consul agent -bind '{{ GetInterfaceIP "eth1" }}' -retry-join "vm-consul-vault-1" -config-dir ${HOME}/consul/service -data-dir /tmp/consul > ${HOME}/consul/consul.out &
     echo 'Services registered to Consul..'
 }
