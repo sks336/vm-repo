@@ -64,7 +64,7 @@ function waitForIPAddressPopulation() {
             fi
             IP_ADDR=$(ifconfig | grep -A 3 'eth1' | grep inet | grep netmask | awk '{print $2}')
             if [ ! -z $IP_ADDR ]; then
-                echo 'IP Address is available and having value as ['${IP_ADDR}']'
+                echo 'IP Address is available and having value as ['${IP_ADDR}'] with HostName as ['$(hostname -f)']'
                 return 0;
             fi
             echo '['$i'] - IP not available yet, would be attempted again in '$INTERVAL' seconds'
