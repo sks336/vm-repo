@@ -11,43 +11,45 @@ function makeBashEntries() {
 }
 
 function refreshIPsFromConsul() {
+CONSUL_IP=192.168.109.11
+HOST_FILE=/etc/hosts
+if [ "$(uname -s)" != "Linux" ]; then
+	HOST_FILE=/private/etc/hosts
+fi
+echo 'HOST_FILE='${HOST_FILE}
+nServices=$(curl -sS http://${CONSUL_IP}:8500/v1/catalog/services | jq keys | jq length)
+entriesFromConsul=''
+for ((i=0;i<nServices;i++)); do
+        serviceName=$(curl -sS http://${CONSUL_IP}:8500/v1/catalog/services | jq keys | jq -r .[$i])
+        if [ "${serviceName}" == "consul" ]; then
+        	echo 'Ignore consul service entries' > /dev/null 2>&1
+        else
+        	serviceJSON=$(curl -sS http://${CONSUL_IP}:8500/v1/catalog/service/${serviceName})
+        	nMachines=$(curl -sS http://${CONSUL_IP}:8500/v1/catalog/service/${serviceName} | jq length)
+        	for ((j=0;j<nMachines;j++)); do
+        	machineJSON=$(curl -sS http://${CONSUL_IP}:8500/v1/catalog/service/${serviceName} | jq .[$j])
+        	ip=$(echo $machineJSON | jq -r .ServiceAddress)
+        	vmName="vm-"$(echo $machineJSON | jq -r .ServiceID)
+        	hostEntry="${ip}"$'\t'"${vmName}"
+        	entriesFromConsul=${entriesFromConsul}${hostEntry}$'\n'
+	    	done
+        fi
+done
+
 echo '127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
 255.255.255.255 broadcasthost
-
+127.0.0.1       vm-sachin
 192.168.0.120   vm-0
 192.168.109.11  vm-consul-vault-1
 192.168.109.12  vm-consul-vault-2
 192.168.109.13  vm-consul-vault-3
 ########################################
+'>${HOST_FILE}
 
-'>/etc/hosts
-
-UPDATE_FROM_CONSUL="true"
-
-while getopts o opts
-do
-    case "${opts}" in
-        o) echo 'Option "-o" is chosen, NOT Going to update from Consul.....'
-            UPDATE_FROM_CONSUL="false";;
-    esac
-done
-
-if [ "$UPDATE_FROM_CONSUL" == "true" ]; then
-        CONSUL_IP=192.168.109.11
-        nodeJSON=$(curl -sS http://${CONSUL_IP}:8500/v1/catalog/nodes)
-        nKeys=$(echo ${nodeJSON} | jq length)
-        for ((i=0;i<nKeys;i++)); do
-                host=$(echo ${nodeJSON} | jq -r .[$i].Node)
-                ip=$(echo ${nodeJSON} | jq -r .[$i].Address)               
-                echo -e "$ip   $host" >> /etc/hosts
-
-        done
-
-fi
-
+echo "$entriesFromConsul" >> ${HOST_FILE}
 echo 'Host Entry cleaned....'
-cat /etc/hosts
+cat ${HOST_FILE}
 }
 
 function waitForIPAddressPopulation() {
