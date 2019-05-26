@@ -12,6 +12,7 @@ alias dps='docker ps'
 alias dpsa='docker ps -a'
 
 export PS1="\u@\h\[\033[32m\]\w\[\033[33m\]\[\033[00m\] $ "
+export CONSUL_IP=192.168.109.11
 export JAVA_HOME=/opt/java
 export MAVEN_HOME=/home/sachin/softwares/maven
 export M2_HOME=/home/sachin/softwares/maven
