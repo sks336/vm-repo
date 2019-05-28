@@ -87,3 +87,27 @@ function registerToConsul() {
     nohup consul agent -node ${IP_ADDR} -bind '{{ GetInterfaceIP "eth1" }}' -retry-join "${CONSUL_IP}" -config-dir ${HOME}/resources/config/consul/service -data-dir /tmp/consul --enable-local-script-checks=true > ${HOME}/consul.out &
     echo 'Services registered to Consul..'
 }
+
+function deregisterService() {
+    SERVICE_NAME=$1
+    if [ -z ${SERVICE_NAME} ]; then
+        echo 'SERVICE_NAME not provided, exiting!!!!'
+        return;
+    fi    
+    nServiceNodes=$(curl -sS http://${CONSUL_IP}:8500/v1/catalog/service/${SERVICE_NAME} | jq length)
+    str=''
+    for((i=0;i<nServiceNodes;i++)); do
+        serviceID=$(curl -sS http://${CONSUL_IP}:8500/v1/catalog/service/${SERVICE_NAME} | jq -r .[$i].ServiceID)
+        ip=$(curl -sS http://${CONSUL_IP}:8500/v1/catalog/service/${SERVICE_NAME} | jq -r .[$i].Address)
+        str=${str}" "${ip}"_""${serviceID}"
+    done
+    echo "[${str}]"
+
+for e in ${str}; do
+    ip=$(echo $e | cut -d '_' -f 1)
+    serviceID=$(echo $e | cut -d '_' -f 2)
+    echo 'ip='$ip', serviceID='$serviceID
+    deregisterCmd="curl -sS --request PUT http://127.0.0.1:8500/v1/agent/service/deregister/${serviceID}"
+    echo "${deregisterCmd}" | ssh sachin@${ip} -T "/bin/bash"  
+done
+}
