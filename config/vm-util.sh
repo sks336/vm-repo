@@ -90,6 +90,7 @@ function registerToConsul() {
 
 function deregisterService() {
     SERVICE_NAME=$1
+    CONSUL_IP=192.168.109.11
     if [ -z ${SERVICE_NAME} ]; then
         echo 'SERVICE_NAME not provided, exiting!!!!'
         return;
