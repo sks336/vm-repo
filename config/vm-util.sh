@@ -45,6 +45,11 @@ echo '127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdom
 192.168.109.12  vm-consul-vault-2
 192.168.109.13  vm-consul-vault-3
 ########################################
+
+127.0.0.1	kafka-dev
+114.143.142.228 zenit.global
+
+54.169.99.65 reality.deskera.com
 '>${HOST_FILE}
 
 echo "$entriesFromConsul" >> ${HOST_FILE}
