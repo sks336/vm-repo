@@ -13,26 +13,30 @@ function makeBashEntries() {
 function refreshIPsFromConsul() {
 CONSUL_IP=192.168.109.11
 HOST_FILE=/etc/hosts
-if [ "$(uname -s)" != "Linux" ]; then
-	HOST_FILE=/private/etc/hosts
+if [[ "$(uname -s)" != "Linux" ]]; then
+        HOST_FILE=/private/etc/hosts
 fi
 echo 'HOST_FILE='${HOST_FILE}
 nServices=$(curl -sS http://${CONSUL_IP}:8500/v1/catalog/services | jq keys | jq length)
 entriesFromConsul=''
 for ((i=0;i<nServices;i++)); do
-        serviceName=$(curl -sS http://${CONSUL_IP}:8500/v1/catalog/services | jq keys | jq -r .[$i])
-        if [ "${serviceName}" == "consul" ]; then
-        	echo 'Ignore consul service entries' > /dev/null 2>&1
+        CMD="curl -sS http://${CONSUL_IP}:8500/v1/catalog/services | jq keys | jq -r '.[$i]'"
+        serviceName=$(/bin/sh -c $CMD)
+        #echo 'serviceName is'$serviceName
+        if [[ "${serviceName}" == "consul" ]]; then
+                echo 'Ignore consul service entries' > /dev/null 2>&1
         else
-        	serviceJSON=$(curl -sS http://${CONSUL_IP}:8500/v1/catalog/service/${serviceName})
-        	nMachines=$(curl -sS http://${CONSUL_IP}:8500/v1/catalog/service/${serviceName} | jq length)
-        	for ((j=0;j<nMachines;j++)); do
-        	machineJSON=$(curl -sS http://${CONSUL_IP}:8500/v1/catalog/service/${serviceName} | jq .[$j])
-        	ip=$(echo $machineJSON | jq -r .ServiceAddress)
-        	vmName="vm-"$(echo $machineJSON | jq -r .ServiceID)
-        	hostEntry="${ip}"$'\t'"${vmName}"
-        	entriesFromConsul=${entriesFromConsul}${hostEntry}$'\n'
-	    	done
+                serviceJSON=$(curl -sS http://${CONSUL_IP}:8500/v1/catalog/service/${serviceName})
+                nMachines=$(curl -sS http://${CONSUL_IP}:8500/v1/catalog/service/${serviceName} | jq length)
+                #echo 'nMachines='$nMachines
+                for ((j=0;j<nMachines;j++)); do
+                machineJSON=$(/bin/sh -c "curl -sS http://${CONSUL_IP}:8500/v1/catalog/service/${serviceName} | jq '.[$j]'")
+                #echo 'machineJSON='$machineJSON
+                ip=$(echo $machineJSON | jq -r .ServiceAddress)
+                vmName="vm-"$(echo $machineJSON | jq -r .ServiceID)
+                hostEntry="${ip}"$'\t'"${vmName}"
+                entriesFromConsul=${entriesFromConsul}${hostEntry}$'\n'
+                done
         fi
 done
 
@@ -45,10 +49,8 @@ echo '127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdom
 192.168.109.12  vm-consul-vault-2
 192.168.109.13  vm-consul-vault-3
 ########################################
-
 127.0.0.1 kafka-dev
 114.143.142.228 zenit.global
-
 54.169.99.65 reality.deskera.com
 '>${HOST_FILE}
 
@@ -78,10 +80,10 @@ function waitForIPAddressPopulation() {
             sleep $INTERVAL
             i=$(($i + 1))
         done
-        
+
 }
 
-function registerToConsul() {  
+function registerToConsul() {
     NODE_ID=$1
     NODE_TYPE=$2
     CONSUL_IP=192.168.109.11
@@ -99,11 +101,11 @@ function deregisterService() {
     if [ -z ${SERVICE_NAME} ]; then
         echo 'SERVICE_NAME not provided, exiting!!!!'
         return;
-    fi    
+    fi
     nServiceNodes=$(curl -sS http://${CONSUL_IP}:8500/v1/catalog/service/${SERVICE_NAME} | jq length)
     str=''
-    for((i=0;i<nServiceNodes;i++)); do
-        serviceID=$(curl -sS http://${CONSUL_IP}:8500/v1/catalog/service/${SERVICE_NAME} | jq -r .[$i].ServiceID)
+    for ((i=0;i<nServiceNodes;i++)); do
+        serviceID=$(/bin/sh -c "curl -sS http://${CONSUL_IP}:8500/v1/catalog/service/${SERVICE_NAME} | jq -r '.[$i]'.ServiceID")
         ip=$(curl -sS http://${CONSUL_IP}:8500/v1/catalog/service/${SERVICE_NAME} | jq -r .[$i].Address)
         str=${str}" "${ip}"_""${serviceID}"
     done
@@ -114,6 +116,6 @@ for e in ${str}; do
     serviceID=$(echo $e | cut -d '_' -f 2)
     echo 'ip='$ip', serviceID='$serviceID
     deregisterCmd="curl -sS --request PUT http://127.0.0.1:8500/v1/agent/service/deregister/${serviceID}"
-    echo "${deregisterCmd}" | ssh sachin@${ip} -T "/bin/bash"  
+    echo "${deregisterCmd}" | ssh sachin@${ip} -T "/bin/bash"
 done
 }
