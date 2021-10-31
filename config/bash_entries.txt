@@ -60,9 +60,6 @@ alias ssh_nginx_1='ssh sachin@vm-nginx-1'
 alias ssh_postgres_1='ssh sachin@vm-postgres-1'
 
 
-alias k=kubectl
-alias kan='k get pods --all-namespaces'
-
 alias ssh_spring_basic_1='ssh sachin@vm-spring-basic-1'
 
 alias ssh_workspace_1='ssh sachin@vm-workspace-1'
