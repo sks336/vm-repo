@@ -70,3 +70,8 @@ alias ssh_workspace_2='ssh sachin@vm-workspace-2'
 alias ssh_workspace_3='ssh sachin@vm-workspace-3'
 
 alias ssh_vm_0='ssh sachin@vm-0'
+
+# Kubectl aliases...........
+alias k=kubectl
+alias .c='kubectl config current-context'
+alias kn='kubectl -n $NS'
